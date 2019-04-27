@@ -67,6 +67,30 @@ $api->version('v1', ['middleware' => ['api']], function ($api) {
         });
 
         /*
+         * Enrollments
+         */
+        $api->group(['prefix' => 'enrollments', 'middleware' => 'check_role:admin'], function ($api) {
+            $api->get('/', 'App\Http\Controllers\EnrollmentController@getAll');
+            $api->get('/{id}', 'App\Http\Controllers\EnrollmentController@get');
+            $api->post('/', 'App\Http\Controllers\EnrollmentController@post');
+            $api->put('/{id}', 'App\Http\Controllers\EnrollmentController@put');
+            $api->patch('/{id}', 'App\Http\Controllers\EnrollmentController@patch');
+            $api->delete('/{id}', 'App\Http\Controllers\EnrollmentController@delete');
+        });
+
+        /*
+         * EnrollmentClasses
+         */
+        $api->group(['prefix' => 'enrollmentclasses', 'middleware' => 'check_role:admin'], function ($api) {
+            $api->get('/', 'App\Http\Controllers\EnrollmentClassController@getAll');
+            $api->get('/{id}', 'App\Http\Controllers\EnrollmentClassController@get');
+            $api->post('/', 'App\Http\Controllers\EnrollmentClassController@post');
+            $api->put('/{id}', 'App\Http\Controllers\EnrollmentClassController@put');
+            $api->patch('/{id}', 'App\Http\Controllers\EnrollmentClassController@patch');
+            $api->delete('/{id}', 'App\Http\Controllers\EnrollmentClassController@delete');
+        });
+
+        /*
          * Roles
          */
         $api->group(['prefix' => 'roles'], function ($api) {
